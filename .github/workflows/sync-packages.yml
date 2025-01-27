@@ -2,8 +2,7 @@ name: Daily Package Sync
 
 on:
   schedule:
-    - cron: '10 13 * * *'  # 每天北京时间5点运行
-      timezone: Asia/Shanghai
+    - cron: '0 13 * * *'  # 每天北京时间5点运行
   workflow_dispatch:  # 添加手动触发选项
 
 jobs:
