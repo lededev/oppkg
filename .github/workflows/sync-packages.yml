@@ -2,13 +2,13 @@ name: Daily Package Sync
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 每天北京时间5点运行
+    - cron: '10 13 * * *'  # 每天北京时间5点运行
       timezone: Asia/Shanghai
   workflow_dispatch:  # 添加手动触发选项
 
 jobs:
   sync-packages:
-    runs-on: debian-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout main repo
         uses: actions/checkout@main
