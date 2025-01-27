@@ -1,0 +1,53 @@
+name: Daily Package Sync
+
+on:
+  schedule:
+    - cron: '0 5 * * *'  # 每天北京时间5点运行
+      timezone: Asia/Shanghai
+  workflow_dispatch:  # 添加手动触发选项
+
+jobs:
+  sync-packages:
+    runs-on: debian-latest
+    steps:
+      - name: Checkout main repo
+        uses: actions/checkout@main
+        with:
+          persist-credentials: true
+          fetch-depth: 0  # 获取完整提交历史
+
+      - name: Setup Git identity
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          sudo timedatectl set-timezone "PRC"
+
+      - name: Execute sync script
+        run: |
+        cd $GITHUB_WORKSPACE
+        chmod +x .github/diy/sync.sh  # 添加执行权限
+        bash /$GITHUB_WORKSPACE/.github/diy/sync.sh
+
+      - name: Commit changes
+        id: commit
+        run: |
+          git add .
+          if git diff --cached --quiet; then
+            echo "🟢 No changes detected"
+          else
+            git commit -m "chore(packages): 自动同步仓库更新 [skip ci] $(date '+%Y-%m-%d %H:%M:%S')"
+            echo "🟠 Changes committed"
+          fi
+
+      - name: Push changes
+        if: steps.commit.outputs.commit == 'true'
+        run: git push origin HEAD:${{ github.ref }}
+
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 1
+          keep_minimum_runs: 1
+
