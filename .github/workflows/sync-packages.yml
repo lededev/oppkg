@@ -24,9 +24,9 @@ jobs:
 
       - name: Execute sync script
         run: |
-        cd $GITHUB_WORKSPACE
-        chmod +x .github/diy/sync.sh  # 添加执行权限
-        bash /$GITHUB_WORKSPACE/.github/diy/sync.sh
+          cd $GITHUB_WORKSPACE
+          chmod +x .github/diy/sync.sh  # 添加执行权限
+          bash /$GITHUB_WORKSPACE/.github/diy/sync.sh
 
       - name: Commit changes
         id: commit
