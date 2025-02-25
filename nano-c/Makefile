@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano-c
 PKG_VERSION:=8.3
-PKG_RELEASE:=4
+PKG_RELEASE:=5
 
 PKG_SOURCE:=nano-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
@@ -74,7 +74,7 @@ endef
 
 define Package/nano-c/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_INSTALL_DIR)/usr/bin/$(PKG_NAME) $(1)/usr/bin/
+	$(CP) $(PKG_INSTALL_DIR)/usr/bin/nano $(1)/usr/bin/
 	$(INSTALL_DIR) $(1)/etc $(1)/usr/share/nano
 	$(INSTALL_DATA) ./files/nanorc $(1)/etc/nanorc
 	$(INSTALL_DATA) ./files/uci.nanorc $(1)/usr/share/nano
