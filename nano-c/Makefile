@@ -14,6 +14,7 @@ PKG_RELEASE:=2
 PKG_SOURCE:=nano-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
 PKG_HASH:=551b717b2e28f7e90f749323686a1b5bbbd84cfa1390604d854a3ca3778f111e
+PKG_BUILD_DIR := $(BUILD_DIR)/nano-c-$(PKG_VERSION)
 
 PKG_LICENSE:=GPL-3.0-or-later
 PKG_LICENSE_FILES:=COPYING
@@ -37,6 +38,11 @@ endef
 define Package/nano-c/description
   Nano (Nano's ANOther editor, or Not ANOther editor) is an enhanced clone
   of the Pico text editor, color highlight enabled.
+endef
+
+define Build/Prepare
+	$(call Build/Prepare/Default)
+	mv $(BUILD_DIR)/nano-$(PKG_VERSION) $(PKG_BUILD_DIR)
 endef
 
 CONFIGURE_ARGS += \
