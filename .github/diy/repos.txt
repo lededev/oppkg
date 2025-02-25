@@ -1,8 +1,8 @@
 # 需要同步的仓库列表（每行一个Git地址）
 # 注释行会被自动忽略
-https://github.com/nobk/openwrt-lzlib.git
-https://github.com/lededev/openwrt-nano.git
-https://github.com/nobk/openwrt-plzip.git
-https://github.com/nobk/openwrt-screen.git
-https://github.com/nobk/openwrt-tarlz.git
+https://github.com/nobk/openwrt-lzlib.git lzlib
+https://github.com/lededev/openwrt-nano.git nano-c
+https://github.com/nobk/openwrt-plzip.git plzip
+https://github.com/nobk/openwrt-screen.git screen-git
+https://github.com/nobk/openwrt-tarlz.git tarlz
 # 结束

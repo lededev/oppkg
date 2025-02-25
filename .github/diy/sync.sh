@@ -19,12 +19,13 @@ if [ -z "$REPO_LIST" ]; then
 fi
 
 echo "📦 开始同步仓库..."
-while IFS= read -r repo_url; do
+while IFS= read -r confline; do
   # 提取仓库名称
-  repo_name=$(basename "$repo_url" .git)
-  target_dir="$PACKAGE_DIR/$repo_name"
+  read giturl gitdir <<< "$confline"
+  repo_name=$(basename "$giturl" .git)
+  target_dir="$PACKAGE_DIR/$gitdir"
 
-  echo "🔄 处理仓库: $repo_name"
+  echo "🔄 处理仓库: $repo_name 目录：$target_dir"
   
   # 清理旧目录
   if [ -d "$target_dir" ]; then
@@ -34,7 +35,7 @@ while IFS= read -r repo_url; do
 
   # 克隆仓库
   echo "⏬ 克隆仓库到: $target_dir"
-  git clone --quiet --depth 1 --single-branch "$repo_url" "$target_dir"
+  git clone --quiet --depth 1 --single-branch "$giturl" "$target_dir"
   
   # 移除.git历史记录
   echo "🧹 清理Git记录"
