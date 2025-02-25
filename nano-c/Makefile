@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano-c
 PKG_VERSION:=8.3
-PKG_RELEASE:=2
+PKG_RELEASE:=3
 
 PKG_SOURCE:=nano-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
@@ -38,11 +38,6 @@ endef
 define Package/nano-c/description
   Nano (Nano's ANOther editor, or Not ANOther editor) is an enhanced clone
   of the Pico text editor, color highlight enabled.
-endef
-
-define Build/Prepare
-	$(call Build/Prepare/Default)
-	mv $(BUILD_DIR)/nano-$(PKG_VERSION) $(PKG_BUILD_DIR)
 endef
 
 CONFIGURE_ARGS += \
