@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=nano-c
-PKG_VERSION:=8.3
-PKG_RELEASE:=5
+PKG_VERSION:=8.4
+PKG_RELEASE:=1
 
 PKG_SOURCE:=nano-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=@GNU/nano
-PKG_HASH:=551b717b2e28f7e90f749323686a1b5bbbd84cfa1390604d854a3ca3778f111e
+PKG_HASH:=5ad29222bbd55624d87ea677928b3106a743114d6c6f9b41f36c97be2a8e628d
 PKG_BUILD_DIR := $(BUILD_DIR)/nano-c-$(PKG_VERSION)
 
 PKG_LICENSE:=GPL-3.0-or-later
@@ -62,11 +62,14 @@ CONFIGURE_ARGS += \
         --disable-mouse \
         --disable-speller \
         --disable-extra \
+        --disable-libmagic \
         --disable-tabcomp \
         --disable-wordcomp
 
 CONFIGURE_VARS += \
 	ac_cv_header_regex_h=no \
+        ac_cv_func_strcasecmp=no \
+        ac_cv_func_strncasecmp=no
 
 define Package/nano-c/conffiles
 /etc/nanorc
